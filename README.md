@@ -1,6 +1,9 @@
 # ng_api
 
 
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=ng_api&uri=https%3A%2F%2Fraw.githubusercontent.com%2FDanielAntunes-dev%2Fng_api%2Fmaster%2FInsomnia_2022-11-18.json)
+
+
 📝 Features Created
 =====================
 * Login (JWT Authentication)
@@ -55,35 +58,4 @@ $ npm run dev
 # running on port 3000
 ```
 
-📇 API documentation
-=================
 
-#### Create User
-
-```http
-  POST http://localhost:3000/create
-```
-
-Json example:
-
-```
-{
-    "username":"UserTest",
-    "password": "123456"
-}
-```
-
-#### Login
-
-```http
-  POST http://localhost:3000/
-```
-
-Json example:
-
-```
-{
-  "username": "UserTest",
-  "password": "123456"
-}
-```
