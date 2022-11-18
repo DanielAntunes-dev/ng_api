@@ -9,9 +9,8 @@ import dayjs from 'dayjs';
 export class AccountsController {
 
   // transferencia entre contas (CASHOUT E CASHIN)
-    async AccountTransfer(req: any, res: Response) {
+    async AccountTransfer(req: Request, res: Response) {
       const { value, username } = req.body
-      console.log(req.user.account.id);
 
 
       if(username === req.user.username ) {
@@ -26,7 +25,7 @@ export class AccountsController {
       if(!checkUsername) { return res.status(400).json({message: 'usuario não existe'})}
 
 
-        const account = await accountRepository.findOneByOrFail({ id: req.user.account.id })
+        const account = await accountRepository.findOneByOrFail({ id: req.user.account!.id })
         if (account.balance < value) {
           return res.status(400).json({message: 'Não possue fundo suficiente'})
         }
@@ -36,7 +35,7 @@ export class AccountsController {
         },
         'balance', value)
 
-        const userCashIn = await userRepository.findOneOrFail({where:{username: username}, relations: {account: true}  })
+        const userCashIn = await userRepository.findOneOrFail({ where:{username: username}, relations: {account: true}  })
 
         await accountRepository.increment({
           id: userCashIn.account.id
@@ -53,18 +52,19 @@ export class AccountsController {
 }
 
 
-  async transfers(req: any, res: Response) {
+  async transfers(req: Request, res: Response) {
+    const query = req.query as any
 
 // select * from tranfers where debitedAccountId = 1 or creditedAccountId = 1
     const transfer = await transactionsRepository.find({where: [
 
       {
-        createdAt: Between(dayjs(req.query.date).startOf('day').toDate(), dayjs(req.query.date).endOf('day').toDate()),
-        debitedAccountId: {id: req.user.account.id},
+        createdAt: Between(dayjs(query.date).startOf('day').toDate(), dayjs(query.date).endOf('day').toDate()),
+        debitedAccountId: {id: req.user.account!.id},
       },
       {
-        createdAt: Between(dayjs(req.query.date).startOf('day').toDate(), dayjs(req.query.date).endOf('day').toDate()),
-        creditedAccountId: {id: req.user.account.id}
+        createdAt: Between(dayjs(query.date).startOf('day').toDate(), dayjs(query.date).endOf('day').toDate()),
+        creditedAccountId: {id: req.user.account!.id}
       }
     ], relations: {debitedAccountId: true}})
 
@@ -72,7 +72,7 @@ export class AccountsController {
     // Só foi feita a relação pra saber se foi cashOut ou cashIn
     const mapTransfers = transfer.map((value) => {
       const { debitedAccountId, ...rest } = value
-      return {...rest, type: debitedAccountId.id === req.user.account.id ? 'CashOut' : 'CashIn'}
+      return {...rest, type: debitedAccountId.id === req.user.account!.id ? 'CashOut' : 'CashIn'}
     })
     console.log(req.query.type)
 
@@ -87,7 +87,7 @@ export class AccountsController {
     res.status(200).json(mapFilters)
   }
 
-  
+
 
 }
 

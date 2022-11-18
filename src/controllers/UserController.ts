@@ -1,12 +1,10 @@
-
-import { CustomRequest } from './../middleware/authMiddleware'
+import { User } from '../entities/User'
 import { Accounts } from './../entities/Accounts'
 import { userRepository } from '../repositories/userRepository'
+import { accountRepository } from '../repositories/accountRepository'
 import { Request, Response } from 'express'
-import { User } from '../entities/User'
 import { validate } from 'class-validator'
 import bcrypt from 'bcryptjs'
-import { accountRepository } from '../repositories/accountRepository'
 
 
 export class UserController {

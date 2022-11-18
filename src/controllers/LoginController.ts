@@ -26,7 +26,7 @@ export class LoginController {
         process.env.JWT_PASS ?? '',
         { expiresIn: '24h' })
 
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        
         const { password: _, ...userLogin } = user
 
         return res.json({

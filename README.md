@@ -29,26 +29,23 @@
 </tr>
 </table>
 
-## Local Project
+### 🔧 Instalação
+    - Após clonar o repositório, acesse via terminal a pasta ./src/ executar o comando "npm install" para instalar todas as dependências do projeto.
 
-To run this project locally, you'll need Git, Node and PostegreSQL installed on your computer.
+    - Criar um arquivo na raiz do projeto com o nome ".env", com o seguinte conteúdo (substitua pelas suas informações sem as aspas):</br>
 
-After cloning project, remember to insert your local database credentials into /.env.
+        DB_HOST="local onde está rodando o servidor, para servidor local usar localhost"
+        DB_PORT="3000"
+        DB_USER="nome do seu usuario no pg"
+        DB_PASS="senha do seu usuario no pg"
+        DB_NAME="api_ng"
 
-```bash
-# Clone this repository
-$ git clone https://github.com/DanielAntunes-dev/ng_api
+        JWT_PASS="criar senha com caracteres validos"
 
-# Go into the repository
-$ cd ng_api
 
-# Install dependencies
-$ npm install
-
-# Run server
-$ npm run dev
-
-# running on port 3000
-```
+    - Criar banco de dados dentro do pg com o seguinte nome: parrot e deixar o banco vazio.
+    - No terminal, rodar os comandos, todos sem aspas:
+    - "npm run migration:generate" e em seguida "npm run migration:run" para gerar as tabelas com as migrations;
+    - Para iniciar o servidor da API via script, acesse o terminal e execute o seguinte comando: npm run dev.
 
 

@@ -11,11 +11,11 @@ export class User {
   @PrimaryGeneratedColumn()
       id: number
 
-  @Column()
+  @Column({type: 'text', unique: true})
   @Length(3, 20)
       username: string
 
-  @Column()
+  @Column({type: 'text'})
   @Length(8, 20)
       password: string
 
