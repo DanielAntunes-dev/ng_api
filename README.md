@@ -17,11 +17,11 @@
 
 <table>
 <tr>
-<td>mysql2</td>
+<td>postegre</td>
 <td>node</td>
 <td>express</td>
+<td>typescript</td>
 <td>typeorm</td>
-<td>typeorm-extension</td>
 <td>bcrypt</td>
 <td>jsonwebtoken</td>
 <td>class-validator</td>
@@ -44,13 +44,6 @@ $ cd ng_api
 
 # Install dependencies
 $ npm install
-
-# Create database
-$ npm db:create
-
-# Run migrations
-$ npm migration:run
-
 
 # Run server
 $ npm run dev
