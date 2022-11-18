@@ -19,8 +19,9 @@ routes.get('/balance', authMiddleware, new UserController().getBalance)
 routes.post('/transfer', authMiddleware, new AccountsController().AccountTransfer)
 
 // middleware de autenticação e todas as tranferêcias(cashOunt e cashIn) registradas no banco de dados
-// filtrar http://localhost:3000/transfer?type=CashOut ou http://localhost:3000/transfer?type=CashIn
-// filtrar http://localhost:3000/transfer?date=(data das transações que deseja no formato aaaa/mm/dd)
+// filtrar por tipo http://localhost:3000/transfer?type=CashOut ou http://localhost:3000/transfer?type=CashIn
+// filtrar por data http://localhost:3000/transfer?date=(data das transações que deseja no formato aaaa/mm/dd)
+// filtrar por tipo e data http://localhost:3000/transfer?type=CashOut&date=aaaa-mm-dd ou http://localhost:3000/transfer?type=CashIn&date=aaaa-mm-dd
 routes.get('/transfer', authMiddleware, new AccountsController().transfers)
 
 
